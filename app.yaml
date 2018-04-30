@@ -1,5 +1,3 @@
-application: als-project
-version: 1
 runtime: python27
 api_version: 1
 threadsafe: yes
@@ -19,6 +17,11 @@ handlers:
 - url: /auctions/add
   script: handlers.auctions.add.app
 
+- url: /profile/.*
+  script: user_profile.apt
+  login: required
+  auth_fail_action: redirect
+
 - url: .*
   script: main.app
 
@@ -28,3 +31,4 @@ libraries:
 
 - name: jinja2
   version: "latest"
+
