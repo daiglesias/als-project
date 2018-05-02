@@ -23,7 +23,7 @@
         </div>
         <div class="form-group col-md-4">
             <label for="risk">Riesgo</label>
-            <input type="text" class="form-control" id="risk" name="risk" placeholder="Precio Final">
+            <input type="text" class="form-control" id="risk" name="risk" placeholder="Riesgo">
         </div>
         <div class="form-group col-md-4">
             <label for="final_price">Precio Final</label>
@@ -34,41 +34,40 @@
 </form>
 
 <div class="data-table">
-    <div class="row">
-        <table class="table table-bordered table-striped table-hover">
-            <thead>
-            <tr>
-                <th scope="col">Nombre</th>
-                <th scope="col">Enlace</th>
-                <th scope="col">PVP</th>
-                <th scope="col">P.Esperado</th>
-                <th scope="col">Riesgo</th>
-                <th scope="col">P. Final</th>
-                <th scope="col" colspan="2" width="1%"></th>
-            </tr>
-            </thead>
-            <tbody>
-            {% if auctions.count() > 0 %}
-            {% for auction in auctions %}
-            <tr>
-                <td>{{auction.name}}</td>
-                <td>{{auction.link}}</td>
-                <td>{{auction.normal_price}}</td>
-                <td>{{auction.wanted_price}}</td>
-                <td>{{auction.risk}}</td>
-                <td>{{auction.final_price}}</td>
-                <td>
-                    <form action="/auctions/delete" method="post">
-                        <input type="hidden" name="auction_id" value="{{auction.key.urlsafe()}}">
-                        <button>X</button>
-                    </form>
-                </td>
-            </tr>
-            {% endfor %}
-            {% endif %}
-            </tbody>
-        </table>
-    </div>
+    <h3>Subastas realizadas</h3>
+    <table data-datatable="1" class="table table-bordered table-striped table-hover">
+        <thead>
+        <tr>
+            <th scope="col">Nombre</th>
+            <th scope="col">Enlace</th>
+            <th scope="col">PVP</th>
+            <th scope="col">P.Esperado</th>
+            <th scope="col">Riesgo</th>
+            <th scope="col">P. Final</th>
+            <th scope="col" width="1%"></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% if auctions.count() > 0 %}
+        {% for auction in auctions %}
+        <tr>
+            <td>{{auction.name}}</td>
+            <td>{{auction.link}}</td>
+            <td>{{auction.normal_price}}</td>
+            <td>{{auction.wanted_price}}</td>
+            <td>{{auction.risk}}</td>
+            <td>{{auction.final_price}}</td>
+            <td>
+                <form action="/auctions/delete" method="post">
+                    <input type="hidden" name="auction_id" value="{{auction.key.urlsafe()}}">
+                    <button>X</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+        {% endif %}
+        </tbody>
+    </table>
 </div>
 
 {% endblock %}

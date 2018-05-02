@@ -27,17 +27,12 @@ class MainHandler(webapp2.RequestHandler):
 
         if user:
             url_login = users.create_logout_url('/')
-            user_name = user.nickname()
-            logged = True
             self.redirect("/options")
         else:
             url_login = users.create_login_url('/')
-            logged = False
-
-        # self.response.out.write(str.format("<html><body>{0}</body></html>", greeting))
 
         jinja = jinja2.get_jinja2(app=self.app)
-        valores = {"url_login": url_login, "logged": logged}
+        valores = {"url_login": url_login, "user": user}
         self.response.write(jinja.render_template('index.html', **valores))
 
 

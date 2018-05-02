@@ -26,9 +26,11 @@ handlers:
 
 - url: /items/add
   script: handlers.items.add.app
+  login: required
 
 - url: /items/delete
   script: handlers.items.delete.app
+  login: required
 
 - url: /auctions
   script: handlers.auctions.app
@@ -36,9 +38,11 @@ handlers:
 
 - url: /auctions/add
   script: handlers.auctions.add.app
+  login: required
 
 - url: /auctions/delete
   script: handlers.auctions.delete.app
+  login: required
 
 - url: .*
   script: main.app

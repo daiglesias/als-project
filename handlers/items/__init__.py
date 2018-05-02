@@ -8,10 +8,12 @@ from model.item import Item
 class ItemHandler(webapp2.RequestHandler):
 
     def get(self):
+        user = users.get_current_user()
+        url_login = users.create_logout_url('/')
         items = Item.query(Item.owner == users.get_current_user().user_id()).order(-Item.added)
 
         jinja = jinja2.get_jinja2(app=self.app)
-        valores = {"items": items}
+        valores = {"url_login": url_login, "user": user, "items": items}
         self.response.write(jinja.render_template('/items.html', **valores))
 
 
