@@ -1,26 +1,30 @@
 {% extends "skeleton.html" %}
 {% block content %}
-<h2>Listado de Compras</h2>
+<h2>Listado de Compras</h2><br/>
 
-<h3>Añadir compra</h3> <br/>
-
+<h3>Añadir compra</h3>
 <form action="/items/add" method="post">
-    <div class="form-group ">
-        <label for="name">Nombre</label>
-        <input type="text" class="form-control" id="name" name="name" placeholder="Nombre del Producto">
-    </div>
-    <div class="form-group ">
-        <label for="link">Enlace (Opcional)</label>
-        <input type="text" class="form-control" id="link" name="link" placeholder="Amazon, Ebay, Yahoo Auctions...">
-    </div>
-    <div class="form-group ">
-        <label for="price">Precio</label>
-        <input type="text" class="form-control" id="price" name="price" placeholder="Precio">
+    <div class="form-row">
+        <div class="form-group col-md-4">
+            <label for="name">Nombre</label>
+            <input type="text" class="form-control" id="name" name="name" placeholder="Nombre del Producto">
+        </div>
+        <div class="form-group col-md-4">
+            <label for="link">Enlace (Opcional)</label>
+            <input type="text" class="form-control" id="link" name="link" placeholder="Amazon, Ebay, Yahoo Auctions...">
+        </div>
+        <div class="form-group col-md-4">
+            <label for="price">Precio</label>
+            <input type="text" class="form-control" id="price" name="price" placeholder="Precio">
+        </div>
     </div>
     <button type="submit" class="btn btn-primary">Insertar</button>
+
 </form>
 
-<div class="row">
+
+<div class="data-table">
+    <h3>Compras realizadas</h3>
     <table class="table table-bordered table-striped table-hover">
         <thead>
         <tr>
