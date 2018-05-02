@@ -29,6 +29,7 @@ class MainHandler(webapp2.RequestHandler):
             url_login = users.create_logout_url('/')
             user_name = user.nickname()
             logged = True
+            self.redirect("/options")
         else:
             url_login = users.create_login_url('/')
             logged = False
@@ -36,27 +37,10 @@ class MainHandler(webapp2.RequestHandler):
         # self.response.out.write(str.format("<html><body>{0}</body></html>", greeting))
 
         jinja = jinja2.get_jinja2(app=self.app)
-        valores = {"url_login": url_login, "logged": logged }
+        valores = {"url_login": url_login, "logged": logged}
         self.response.write(jinja.render_template('index.html', **valores))
 
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler)
 ], debug=True)
-
-
-
-
-
-"""
-user = users.get_current_user()
-if not user:
-    login_url = users.create_login_url("/")
-    login_page = "<html><body><a href='" \
-                    + login_url \
-                    +  "'>Login</a></body></html>"
-    self.response.write(login_page)
-    return
-
-self.response.write('Hello world!')
-"""

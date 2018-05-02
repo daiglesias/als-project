@@ -1,0 +1,53 @@
+{% extends "skeleton.html" %}
+{% block content %}
+<h2>Listado de Compras</h2>
+
+<h3>Añadir compra</h3> <br/>
+
+<form action="/items/add" method="post">
+    <div class="form-group ">
+        <label for="name">Nombre</label>
+        <input type="text" class="form-control" id="name" name="name" placeholder="Nombre del Producto">
+    </div>
+    <div class="form-group ">
+        <label for="link">Enlace (Opcional)</label>
+        <input type="text" class="form-control" id="link" name="link" placeholder="Amazon, Ebay, Yahoo Auctions...">
+    </div>
+    <div class="form-group ">
+        <label for="price">Precio</label>
+        <input type="text" class="form-control" id="price" name="price" placeholder="Precio">
+    </div>
+    <button type="submit" class="btn btn-primary">Insertar</button>
+</form>
+
+<div class="row">
+    <table class="table table-bordered table-striped table-hover">
+        <thead>
+        <tr>
+            <th scope="col">Nombre</th>
+            <th scope="col">Enlace</th>
+            <th scope="col">Precio</th>
+            <th scope="col" colspan="2" width="1%"></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% if items.count() > 0 %}
+        {% for item in items %}
+        <tr>
+            <td>{{item.name}}</td>
+            <td>{{item.link}}</td>
+            <td>{{item.price}}</td>
+            <td>
+                <form action="/items/delete" method="post">
+                    <input type="hidden" name="item_id" value="{{item.key.urlsafe()}}">
+                    <button>X</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+        {% endif %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

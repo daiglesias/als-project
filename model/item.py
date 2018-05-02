@@ -3,7 +3,7 @@ from google.appengine.ext import ndb
 
 class Item(ndb.Model):
     name = ndb.StringProperty(required=True)
-    description = ndb.StringProperty(required=True)
     link = ndb.StringProperty()
     price = ndb.FloatProperty()
-    property = ndb.StringProperty(required=True)
+    owner = ndb.StringProperty(required=True)
+    added = ndb.DateProperty(auto_now_add=True, indexed=True)

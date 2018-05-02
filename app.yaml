@@ -11,16 +11,31 @@ handlers:
   static_files: favicon.ico
   upload: favicon\.ico
 
-- url: /items/add
-  script: handlers.items.add.app
-
-- url: /auctions/add
-  script: handlers.auctions.add.app
-
 - url: /profile/.*
   script: user_profile.apt
   login: required
   auth_fail_action: redirect
+
+- url: /options
+  script: handlers.options.app
+  login: required
+
+- url: /items
+  script: handlers.items.app
+  login: required
+
+- url: /auctions
+  script: handlers.auctions.app
+  login: required
+
+- url: /items/add
+  script: handlers.items.add.app
+
+- url: /items/delete
+  script: handlers.items.delete.app
+
+- url: /auctions/add
+  script: handlers.auctions.add.app
 
 - url: .*
   script: main.app

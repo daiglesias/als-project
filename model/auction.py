@@ -10,4 +10,6 @@ class Auction(ndb.Model):
     risk = ndb.FloatProperty()
     final_price = ndb.FloatProperty()
     state = ndb.BooleanProperty()
-    property = ndb.StringProperty(required=True)
+    owner = ndb.StringProperty(required=True)
+    added = ndb.DateProperty(auto_now_add=True, indexed=True)
+
