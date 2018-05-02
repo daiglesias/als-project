@@ -3,31 +3,40 @@
 <h2>Listado de Subastas</h2><br/>
 
 <h3>Añadir subasta</h3>
-<form action="/auctions/add" method="post">
+<form action="/auctions/add" data-toggle="validator" method="post">
     <div class="form-row">
         <div class="form-group col-md-4">
             <label for="name">Nombre</label>
-            <input type="text" class="form-control" id="name" name="name" placeholder="Nombre del Producto">
+            <input type="text" class="form-control" id="name" name="name" required="required"
+                   placeholder="Nombre del Producto">
         </div>
         <div class="form-group col-md-4">
             <label for="link">Enlace (Opcional)</label>
-            <input type="text" class="form-control" id="link" name="link" placeholder="Amazon, Ebay, Yahoo Auctions...">
+            <input type="text"
+                   pattern="(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9]\.[^\s]{2,})"
+                   class="form-control" id="link" name="link" placeholder="Amazon, Ebay, Yahoo Auctions...">
         </div>
         <div class="form-group col-md-4">
             <label for="normal_price">PVP</label>
-            <input type="text" class="form-control" id="normal_price" name="normal_price" placeholder="P.V.P">
+            <input type="number" step="0.01" class="form-control" id="normal_price" required="required"
+                   name="normal_price"
+                   placeholder="P.V.P">
         </div>
         <div class="form-group col-md-4">
             <label for="wanted_price">Precio Esperado</label>
-            <input type="text" class="form-control" id="wanted_price" name="wanted_price" placeholder="Precio">
+            <input type="number" step="0.01" class="form-control" id="wanted_price" required="required"
+                   name="wanted_price"
+                   placeholder="Precio">
         </div>
         <div class="form-group col-md-4">
             <label for="risk">Riesgo</label>
-            <input type="text" class="form-control" id="risk" name="risk" placeholder="Riesgo">
+            <input type="number" step="0.01" class="form-control" id="risk" name="risk" required="required"
+                   placeholder="En porcentaje">
         </div>
         <div class="form-group col-md-4">
-            <label for="final_price">Precio Final</label>
-            <input type="text" class="form-control" id="final_price" name="final_price" placeholder="Precio Final">
+            <label for="final_price">Precio Final (Opcional)</label>
+            <input type="number" step="0.01" class="form-control" id="final_price" name="final_price"
+                   placeholder="Precio Final">
         </div>
     </div>
     <button type="submit" class="btn btn-primary">Insertar</button>
@@ -35,7 +44,7 @@
 
 <div class="data-table">
     <h3>Subastas realizadas</h3>
-    <table data-datatable="1" class="table table-bordered table-striped table-hover">
+    <table data-datatable="1" class="table table-bordered table-striped table-hover no-pad">
         <thead>
         <tr>
             <th scope="col">Nombre</th>
@@ -52,7 +61,7 @@
         {% for auction in auctions %}
         <tr>
             <td>{{auction.name}}</td>
-            <td>{{auction.link}}</td>
+            <td><a href="{{auction.link}}">{{auction.link}}</a></td>
             <td>{{auction.normal_price}}</td>
             <td>{{auction.wanted_price}}</td>
             <td>{{auction.risk}}</td>

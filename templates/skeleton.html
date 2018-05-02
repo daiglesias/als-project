@@ -64,9 +64,11 @@
 <script type="text/javascript" charset="utf8"
         src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.16/js/dataTables.bootstrap4.min.js"></script>
 
+<!-- Validations -->
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.9/validator.min.js"></script>
+
 <script>
-
-
     $(document).ready(function () {
         $('table[data-datatable="1"]').DataTable({
             "language": {
@@ -75,6 +77,9 @@
         });
     });
 </script>
+
+{% block scripts %}
+{% endblock %}
 
 
 </body>
