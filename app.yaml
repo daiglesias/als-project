@@ -24,18 +24,21 @@ handlers:
   script: handlers.items.app
   login: required
 
-- url: /auctions
-  script: handlers.auctions.app
-  login: required
-
 - url: /items/add
   script: handlers.items.add.app
 
 - url: /items/delete
   script: handlers.items.delete.app
 
+- url: /auctions
+  script: handlers.auctions.app
+  login: required
+
 - url: /auctions/add
   script: handlers.auctions.add.app
+
+- url: /auctions/delete
+  script: handlers.auctions.delete.app
 
 - url: .*
   script: main.app

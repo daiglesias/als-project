@@ -2,7 +2,7 @@ import webapp2
 from google.appengine.ext import ndb
 
 
-class AddItem(webapp2.RequestHandler):
+class DeleteItem(webapp2.RequestHandler):
 
     def post(self):
         item_id = self.request.get("item_id").strip()
@@ -14,5 +14,5 @@ class AddItem(webapp2.RequestHandler):
 
 
 app = webapp2.WSGIApplication([
-    ("/items/delete", AddItem),
+    ("/items/delete", DeleteItem),
 ], debug=True)

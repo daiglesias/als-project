@@ -1,23 +1,74 @@
 {% extends "skeleton.html" %}
 {% block content %}
-<h2>Listado de Subastas</h2>
-<div class="row">
+<h2>Listado de Subastas</h2><br/>
+
+<h3>Añadir subasta</h3>
+<form action="/auctions/add" method="post">
+    <div class="form-row">
+        <div class="form-group col-md-4">
+            <label for="name">Nombre</label>
+            <input type="text" class="form-control" id="name" name="name" placeholder="Nombre del Producto">
+        </div>
+        <div class="form-group col-md-4">
+            <label for="link">Enlace (Opcional)</label>
+            <input type="text" class="form-control" id="link" name="link" placeholder="Amazon, Ebay, Yahoo Auctions...">
+        </div>
+        <div class="form-group col-md-4">
+            <label for="normal_price">PVP</label>
+            <input type="text" class="form-control" id="normal_price" name="normal_price" placeholder="P.V.P">
+        </div>
+        <div class="form-group col-md-4">
+            <label for="wanted_price">Precio Esperado</label>
+            <input type="text" class="form-control" id="wanted_price" name="wanted_price" placeholder="Precio">
+        </div>
+        <div class="form-group col-md-4">
+            <label for="risk">Riesgo</label>
+            <input type="text" class="form-control" id="risk" name="risk" placeholder="Precio Final">
+        </div>
+        <div class="form-group col-md-4">
+            <label for="final_price">Precio Final</label>
+            <input type="text" class="form-control" id="final_price" name="final_price" placeholder="Precio Final">
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Insertar</button>
+</form>
+
+<div class="data-table">
+    <div class="row">
         <table class="table table-bordered table-striped table-hover">
             <thead>
-                <tr>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Enlace</th>
-                    <th scope="col">PVP</th>
-                    <th scope="col">P.Esperado</th>
-                    <th scope="col">Riesgo</th>
-                    <th scope="col">P. Final</th>
-                    <th scope="col" colspan="2" width="1%"></th>
-                </tr>
+            <tr>
+                <th scope="col">Nombre</th>
+                <th scope="col">Enlace</th>
+                <th scope="col">PVP</th>
+                <th scope="col">P.Esperado</th>
+                <th scope="col">Riesgo</th>
+                <th scope="col">P. Final</th>
+                <th scope="col" colspan="2" width="1%"></th>
+            </tr>
             </thead>
             <tbody>
-            # Loops go here
+            {% if auctions.count() > 0 %}
+            {% for auction in auctions %}
+            <tr>
+                <td>{{auction.name}}</td>
+                <td>{{auction.link}}</td>
+                <td>{{auction.normal_price}}</td>
+                <td>{{auction.wanted_price}}</td>
+                <td>{{auction.risk}}</td>
+                <td>{{auction.final_price}}</td>
+                <td>
+                    <form action="/auctions/delete" method="post">
+                        <input type="hidden" name="auction_id" value="{{auction.key.urlsafe()}}">
+                        <button>X</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+            {% endif %}
             </tbody>
         </table>
+    </div>
 </div>
 
 {% endblock %}
