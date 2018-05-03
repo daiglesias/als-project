@@ -3,7 +3,9 @@
 <h2>Listado de Subastas</h2><br/>
 
 <h3>Añadir subasta</h3>
-<form action="/auctions/add" data-toggle="validator" method="post">
+<form action="/auctions/add" data-toggle="validator" autocomplete="off" method="post">
+    <input type="hidden" name="auction_id" value="" id="auction_id"/>
+
     <div class="form-row">
         <div class="form-group col-md-4">
             <label for="name">Nombre</label>
@@ -71,6 +73,7 @@
                     <input type="hidden" name="auction_id" value="{{auction.key.urlsafe()}}">
                     <button>X</button>
                 </form>
+                <button class="update_auction" data-auction-id="{{auction.key.urlsafe()}}">(M)</button>
             </td>
         </tr>
         {% endfor %}
@@ -78,5 +81,31 @@
         </tbody>
     </table>
 </div>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+    'use strict';
+    $(".update_auction").click(function () {
+        var $this = $(this);
+        var auctionId = $this.data("auctionId");
+        var $form = $this.parent().parent();
+        var name = $form.find("td:nth-child(1)").text();
+        var link = $form.find("td:nth-child(2)").text();
+        var normalPrice = $form.find("td:nth-child(3)").text();
+        var wantedPrice = $form.find("td:nth-child(4)").text();
+        var risk = $form.find("td:nth-child(5)").text();
+        var finalPrice = $form.find("td:nth-child(6)").text();
+        $("#auction_id").val(auctionId);
+        $("#name").val(name);
+        $("#link").val(link);
+        $("#normal_price").val(normalPrice);
+        $("#wanted_price").val(wantedPrice);
+        $("#risk").val(risk);
+        $("#final_price").val(finalPrice);
+
+    });
+</script>
 
 {% endblock %}
