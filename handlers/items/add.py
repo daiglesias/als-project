@@ -14,6 +14,9 @@ class AddItem(webapp2.RequestHandler):
         price = float(self.request.get("price", 0.0).strip())
         owner = users.get_current_user().user_id()
 
+        if link and not link.startswith("http://") and not link.startswith("https://"):
+            link = "http://" + link
+
         if item_id:
             item = ndb.Key(urlsafe=item_id).get()
             item.name = name

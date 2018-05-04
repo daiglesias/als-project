@@ -19,7 +19,7 @@
         </div>
         <div class="form-group col-md-4">
             <label for="price">Precio</label>
-            <input type="number" step="0.01" class="form-control" id="price" name="price" required="required"
+            <input type="number" class="form-control" id="price" name="price" required="required" step="0.01" min="0"
                    placeholder="Precio">
         </div>
     </div>
@@ -44,14 +44,12 @@
         {% for item in items %}
         <tr>
             <td>{{item.name}}</td>
-            <td><a href="{{item.link}}">{{item.link}}</a></td>
+            <td><a href="{{item.link}}" target="_blank">{{item.link}}</a></td>
             <td>{{item.price}}</td>
-            <td>
-                <form action="/items/delete" method="post">
-                    <input type="hidden" name="item_id" value="{{item.key.urlsafe()}}">
-                    <button>X</button>
-                </form>
-                <button class="update_item" data-item-id="{{item.key.urlsafe()}}">(M)</button>
+            <td class="text-nowrap">
+                <a href="#" class="delete_item" data-item-id="{{item.key.urlsafe()}}"><i
+                        class="far fa-minus-square"></i></a>
+                <a href="#" class="update_item" data-item-id="{{item.key.urlsafe()}}"><i class="far fa-edit"></i></a>
             </td>
         </tr>
         {% endfor %}
@@ -78,6 +76,17 @@
         $("#price").val(price);
 
     });
+
+    $(".delete_item").click(function () {
+        var $this = $(this);
+        var itemId = $this.data("itemId");
+        $.post("/items/delete", {item_id: itemId})
+            .done(function () {
+                window.location.reload();
+            });
+    });
+
+
 </script>
 
 {% endblock %}

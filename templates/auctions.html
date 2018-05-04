@@ -20,24 +20,24 @@
         </div>
         <div class="form-group col-md-4">
             <label for="normal_price">PVP</label>
-            <input type="number" step="0.01" class="form-control" id="normal_price" required="required"
+            <input type="number" class="form-control" id="normal_price" required="required" step="0.01" min="0"
                    name="normal_price"
                    placeholder="P.V.P">
         </div>
         <div class="form-group col-md-4">
             <label for="wanted_price">Precio Esperado</label>
-            <input type="number" step="0.01" class="form-control" id="wanted_price" required="required"
+            <input type="number" class="form-control" id="wanted_price" required="required" step="0.01" min="0"
                    name="wanted_price"
                    placeholder="Precio">
         </div>
         <div class="form-group col-md-4">
             <label for="risk">Riesgo</label>
-            <input type="number" step="0.01" class="form-control" id="risk" name="risk" required="required"
+            <input type="number" step="0.01" class="form-control" id="risk" name="risk" required="required" min="0"
                    placeholder="En porcentaje">
         </div>
         <div class="form-group col-md-4">
             <label for="final_price">Precio Final (Opcional)</label>
-            <input type="number" step="0.01" class="form-control" id="final_price" name="final_price"
+            <input type="number" class="form-control" id="final_price" name="final_price" step="0.01" min="0"
                    placeholder="Precio Final">
         </div>
     </div>
@@ -63,17 +63,16 @@
         {% for auction in auctions %}
         <tr>
             <td>{{auction.name}}</td>
-            <td><a href="{{auction.link}}">{{auction.link}}</a></td>
+            <td><a href="{{auction.link}}" target="_blank">{{auction.link}}</a></td>
             <td>{{auction.normal_price}}</td>
             <td>{{auction.wanted_price}}</td>
             <td>{{auction.risk}}</td>
             <td>{{auction.final_price}}</td>
-            <td>
-                <form action="/auctions/delete" method="post">
-                    <input type="hidden" name="auction_id" value="{{auction.key.urlsafe()}}">
-                    <button>X</button>
-                </form>
-                <button class="update_auction" data-auction-id="{{auction.key.urlsafe()}}">(M)</button>
+            <td class="text-nowrap">
+                <a href="#" class="delete_auction" data-auction-id="{{auction.key.urlsafe()}}"><i
+                        class="far fa-minus-square"></i></a>
+                <a href="#" class="update_auction" data-auction-id="{{auction.key.urlsafe()}}"><i
+                        class="far fa-edit"></i></a>
             </td>
         </tr>
         {% endfor %}
@@ -105,6 +104,16 @@
         $("#risk").val(risk);
         $("#final_price").val(finalPrice);
 
+    });
+
+
+    $(".delete_auction").click(function () {
+        var $this = $(this);
+        var auctionId = $this.data("auctionId");
+        $.post("/auctions/delete", {auction_id: auctionId})
+            .done(function () {
+                window.location.reload();
+            });
     });
 </script>
 

@@ -1,0 +1,31 @@
+{% extends "skeleton.html" %}
+{% block content %}
+<h2>Resumen de Gastos</h2><br/>
+
+<div class="data-table">
+    <h3>Subastas realizadas</h3>
+    <table data-datatable="1" class="table table-bordered table-striped table-hover no-pad">
+        <thead>
+        <tr>
+            <th scope="col">Año</th>
+            <th scope="col">Mes</th>
+            <th scope="col">Total de Gastos</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% if expenses %}
+        {% for year, a in expenses.items() %}
+        {% for month, total in a.items() %}
+        <tr>
+            <td>{{year}}</td>
+            <td>{{month}}</td>
+            <td>{{total}}</td>
+        </tr>
+        {% endfor %}
+        {% endfor %}
+        {% endif %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

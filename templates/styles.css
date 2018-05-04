@@ -18,3 +18,7 @@ body {
 .no-pad {
     padding: 0 0 0 0;
 }
+
+.text-nowrap {
+    white-space: nowrap;
+}

@@ -17,6 +17,9 @@ class AddAuction(webapp2.RequestHandler):
         final_price = float(self.request.get("final_price", 0.0).strip())
         owner = users.get_current_user().user_id()
 
+        if link and not link.startswith("http://") and not link.startswith("https://"):
+            link = "http://" + link
+
         if auction_id:
             auction = ndb.Key(urlsafe=auction_id).get()
             auction.name = name
