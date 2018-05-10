@@ -22,3 +22,10 @@ body {
 .text-nowrap {
     white-space: nowrap;
 }
+
+#navbarFavicon {
+    transition: transform .3s ease-in-out;
+}
+#navbarFavicon:hover {
+    transform: rotate(-45deg);
+}
