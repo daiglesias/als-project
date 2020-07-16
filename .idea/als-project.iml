@@ -3,22 +3,17 @@
   <component name="FacetManager">
     <facet type="google-appengine-python" name="Google App Engine (Python)">
       <configuration>
-        <option name="rootFolder" value="C:\Users\eseida\PycharmProjects\als-project" />
-        <option name="sdkFolder" value="C:\Program Files (x86)\Google\Cloud SDK\google-cloud-sdk\platform\google_appengine" />
-        <option name="templatesFolder" value="" />
-        <option name="oauth2" value="false" />
-        <option name="deployConfigured" value="false" />
-        <option name="saveCredentials" value="false" />
+        <option name="rootFolder" value="C:\Users\SharkTimes\Desktop\Projects\als-project" />
+        <option name="sdkFolder" value="$USER_HOME$/AppData/Local/Google/Cloud SDK/google-cloud-sdk/bin" />
       </configuration>
     </facet>
   </component>
   <component name="NewModuleRootManager">
-    <content url="file://$MODULE_DIR$" />
-    <orderEntry type="inheritedJdk" />
+    <content url="file://$MODULE_DIR$">
+      <excludeFolder url="file://$MODULE_DIR$/venv" />
+    </content>
+    <orderEntry type="jdk" jdkName="Python 2.7 (als-project)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="Google App Engine SDK" level="project" />
-  </component>
-  <component name="TestRunnerService">
-    <option name="PROJECT_TEST_RUNNER" value="Unittests" />
   </component>
 </module>

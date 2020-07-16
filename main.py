@@ -32,8 +32,8 @@ class MainHandler(webapp2.RequestHandler):
             url_login = users.create_login_url('/')
 
         jinja = jinja2.get_jinja2(app=self.app)
-        valores = {"url_login": url_login, "user": user}
-        self.response.write(jinja.render_template('index.html', **valores))
+        values = {"url_login": url_login, "user": user}
+        self.response.write(jinja.render_template('index.html', **values))
 
 
 app = webapp2.WSGIApplication([

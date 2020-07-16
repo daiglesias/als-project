@@ -14,7 +14,14 @@ class AddAuction(webapp2.RequestHandler):
         normal_price = float(self.request.get("normal_price", 0.0).strip())
         wanted_price = float(self.request.get("wanted_price", 0.0).strip())
         risk = float(self.request.get("risk", 0.0).strip())
-        final_price = float(self.request.get("final_price", 0.0).strip())
+
+        optional_float = self.request.get("final_price", 0.0)
+
+        if optional_float:
+            final_price = float(optional_float.strip())
+        else:
+            final_price = 0.0
+
         owner = users.get_current_user().user_id()
 
         if link and not link.startswith("http://") and not link.startswith("https://"):

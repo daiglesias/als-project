@@ -13,8 +13,8 @@ class ItemHandler(webapp2.RequestHandler):
         items = Item.query(Item.owner == users.get_current_user().user_id()).order(-Item.added)
 
         jinja = jinja2.get_jinja2(app=self.app)
-        valores = {"url_login": url_login, "user": user, "items": items}
-        self.response.write(jinja.render_template('/items.html', **valores))
+        values = {"url_login": url_login, "user": user, "items": items}
+        self.response.write(jinja.render_template('/items.html', **values))
 
 
 app = webapp2.WSGIApplication([

@@ -48,8 +48,8 @@ class ExpensesHandler(webapp2.RequestHandler):
             expenses[year][month] += auction.final_price
 
         jinja = jinja2.get_jinja2(app=self.app)
-        valores = {"url_login": url_login, "user": user, "expenses": expenses}
-        self.response.write(jinja.render_template('/expenses.html', **valores))
+        values = {"url_login": url_login, "user": user, "expenses": expenses}
+        self.response.write(jinja.render_template('/expenses.html', **values))
 
 
 app = webapp2.WSGIApplication([
